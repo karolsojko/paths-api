@@ -2,7 +2,22 @@ NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
 
-skill_read:
+path_read:
     type:     rest
-    prefix: /api/v1
+    prefix:   /api/v1
     resource: AppBundle\Controller\Paths\ReadController
+
+path_create:
+    type:     rest
+    prefix:   /api/v1
+    resource: AppBundle\Controller\Paths\CreateController
+
+path_goal_create:
+    type:     rest
+    prefix:   /api/v1
+    resource: AppBundle\Controller\Paths\Goals\CreateController
+
+path_goal_delete:
+    type:     rest
+    prefix:   /api/v1
+    resource: AppBundle\Controller\Paths\Goals\DeleteController

@@ -3,10 +3,11 @@
 namespace Domain\UseCase;
 
 use Domain\Repository\PathsRepository;
-use Domain\UseCase\GetPath\Command;
-use Domain\UseCase\GetPath\Responder;
+use Domain\UseCase\AddGoal\Command;
+use Domain\UseCase\AddGoal\Responder;
+use Domain\Model\Goal;
 
-class GetPath
+class AddGoal
 {
     private $pathsRepository;
 
@@ -23,6 +24,14 @@ class GetPath
             return;
         }
 
-        $responder->pathSuccessfullyRetrieved($path);
+        $goal = new Goal($command->getName(), $command->getDescription());
+        $goal->setIcon($command->getIcon());
+        $goal->setLevel($command->getLevel());
+
+        $path->addGoal($goal);
+
+        $this->pathsRepository->add($path);
+
+        $responder->goalSuccessfullyAddedToPath($path);
     }
 }

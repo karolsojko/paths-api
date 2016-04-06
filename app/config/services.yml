@@ -4,6 +4,18 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.repository.path:
+        class: Infrastructure\ODM\Repository\PathsRepository
+        arguments: ['@doctrine.odm.mongodb.document_manager']
+    app.use_case.get_path:
+        class: Domain\UseCase\GetPath
+        arguments: ['@app.repository.path']
+    app.use_case.add_path:
+        class: Domain\UseCase\AddPath
+        arguments: ['@app.repository.path']
+    app.use_case.add_path_goal:
+        class: Domain\UseCase\AddGoal
+        arguments: ['@app.repository.path']
+    app.use_case.remove_path_goal:
+        class: Domain\UseCase\RemoveGoal
+        arguments: ['@app.repository.path']

@@ -4,5 +4,6 @@ Domain\Model\Path:
             type: string
             id: true
             strategy: NONE
+    embedMany:
         goals:
-            type: hash
+            targetDocument: Domain\Model\Goal

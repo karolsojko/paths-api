@@ -1,0 +1,15 @@
+Domain\Model\Goal:
+    type: embeddedDocument
+    fields:
+        id:
+            type: string
+            id: true
+            strategy: NONE
+        name:
+            type: string
+        icon:
+            type: string
+        description:
+            type: string
+        level:
+            type: int
