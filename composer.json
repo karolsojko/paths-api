@@ -38,7 +38,8 @@
         "mongodb/mongodb":"@beta",
         "alcaeus/mongo-php-adapter": "dev-composer-provide",
         "nelmio/api-doc-bundle": "^2.11",
-        "nelmio/cors-bundle": "^1.4"
+        "nelmio/cors-bundle": "^1.4",
+        "ramsey/uuid": "^3.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

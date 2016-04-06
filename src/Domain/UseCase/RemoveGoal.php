@@ -3,10 +3,11 @@
 namespace Domain\UseCase;
 
 use Domain\Repository\PathsRepository;
-use Domain\UseCase\GetPath\Command;
-use Domain\UseCase\GetPath\Responder;
+use Domain\UseCase\RemoveGoal\Command;
+use Domain\UseCase\RemoveGoal\Responder;
+use Domain\Model\Goal;
 
-class GetPath
+class RemoveGoal
 {
     private $pathsRepository;
 
@@ -23,6 +24,10 @@ class GetPath
             return;
         }
 
-        $responder->pathSuccessfullyRetrieved($path);
+        $path->removeGoal($command->getGoalId());
+
+        $this->pathsRepository->add($path);
+
+        $responder->goalSuccessfullyRemovedFromPath($path);
     }
 }
