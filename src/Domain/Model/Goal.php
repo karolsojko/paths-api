@@ -11,6 +11,9 @@ class Goal
     private $description;
     private $icon;
     private $level;
+    private $order;
+    private $dueDate;
+    private $achieved;
 
     public function __construct($name, $description)
     {
@@ -18,6 +21,7 @@ class Goal
         $this->id = $uuid->toString();
         $this->name = $name;
         $this->description = $description;
+        $this->achieved = false;
     }
 
     public function getId()
@@ -48,6 +52,36 @@ class Goal
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    public function isAchieved()
+    {
+        return $this->achieved;
+    }
+
+    public function setAchieved($achieved)
+    {
+        $this->achieved = $achieved;
+    }
+
+    public function getDueDate()
+    {
+        return $this->dueDate;
+    }
+
+    public function setDueDate($dueDate)
+    {
+        $this->dueDate = $dueDate;
     }
 
     public function setIcon($icon)

@@ -23,6 +23,8 @@ class CreateController extends FOSRestController implements Responder
      *     {"name"="name", "dataType"="string", "required"=true, "description"="goal name"},
      *     {"name"="description", "dataType"="string", "required"=true, "description"="goal description"},
      *     {"name"="icon", "dataType"="string", "required"=false, "description"="goal icon url"},
+     *     {"name"="order", "dataType"="integer", "required"=false, "description"="order number"},
+     *     {"name"="dueDate", "dataType"="DateTime", "required"=false, "description"="due date"},
      *     {"name"="level", "dataType"="integer", "required"=false, "description"="goal level"}
      *   }
      * )
@@ -35,18 +37,26 @@ class CreateController extends FOSRestController implements Responder
         $description = $request->get('description');
         $icon = $request->get('icon');
         $level = $request->get('level');
+        $order = $request->get('order');
+        $dueDate = $request->get('dueDate');
 
         if (empty($name) || empty($description)) {
-          throw new HttpException(400, 'Missing required parameters');
+            throw new HttpException(400, 'Missing required parameters');
         }
 
         $command = new Command($userId, $name, $description);
 
         if (!empty($icon)) {
-          $command->setIcon($icon);
+            $command->setIcon($icon);
         }
         if (!empty($level)) {
-          $command->setLevel($level);
+            $command->setLevel($level);
+        }
+        if (isset($order)) {
+            $command->setOrder($order);
+        }
+        if (!empty($dueDate)) {
+            $command->setDueDate($dueDate);
         }
 
         $useCase->execute($command, $this);
