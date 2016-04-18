@@ -27,6 +27,8 @@ class AddGoal
         $goal = new Goal($command->getName(), $command->getDescription());
         $goal->setIcon($command->getIcon());
         $goal->setLevel($command->getLevel());
+        $goal->setOrder($command->getOrder());
+        $goal->setDueDate($command->getDueDate());
 
         $path->addGoal($goal);
 

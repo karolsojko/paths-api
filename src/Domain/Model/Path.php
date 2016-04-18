@@ -28,6 +28,10 @@ class Path
 
     public function addGoal(Goal $goal)
     {
+        if ($goal->getOrder() === null) {
+            $goal->setOrder($this->getNextOrderNumber());
+        }
+
         $this->goals[] = $goal;
     }
 
@@ -44,5 +48,10 @@ class Path
         if ($index !== null) {
             unset($this->goals[$index]);
         }
+    }
+
+    private function getNextOrderNumber()
+    {
+        return count($this->goals) + 1;
     }
 }

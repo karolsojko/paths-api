@@ -9,6 +9,8 @@ class Command
     private $description;
     private $icon;
     private $level;
+    private $order;
+    private $dueDate;
 
     public function __construct($userId, $name, $description)
     {
@@ -50,5 +52,25 @@ class Command
     public function getLevel()
     {
         return $this->level;
+    }
+
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    public function getDueDate()
+    {
+        return $this->dueDate;
+    }
+
+    public function setDueDate($dueDate)
+    {
+        $this->dueDate = $dueDate;
     }
 }

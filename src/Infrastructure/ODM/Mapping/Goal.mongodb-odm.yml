@@ -13,3 +13,9 @@ Domain\Model\Goal:
             type: string
         level:
             type: int
+        order:
+            type: int
+        dueDate:
+            type: date
+        achieved:
+            type: boolean
