@@ -19,3 +19,6 @@ services:
     app.use_case.remove_path_goal:
         class: Domain\UseCase\RemoveGoal
         arguments: ['@app.repository.path']
+    app.use_case.edit_path_goal:
+        class: Domain\UseCase\EditGoal
+        arguments: ['@app.repository.path']
