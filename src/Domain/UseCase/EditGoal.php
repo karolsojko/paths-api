@@ -39,10 +39,10 @@ class EditGoal
             $goal->setIcon($command->icon);
         }
         if (isset($command->level)) {
-            $goal->setLevel($command->level);
+            $goal->setLevel(intval($command->level));
         }
         if (isset($command->order)) {
-            $goal->setOrder($command->order);
+            $goal->setOrder(intval($command->order));
         }
         if (isset($command->dueDate)) {
             $goal->setDueDate($command->dueDate);
@@ -53,6 +53,6 @@ class EditGoal
 
         $this->pathsRepository->add($path);
 
-        $responder->goalSuccesfullyEdited($goal);
+        $responder->goalSuccesfullyEdited($path);
     }
 }

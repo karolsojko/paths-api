@@ -32,7 +32,7 @@ class EditGoalSpec extends ObjectBehavior
 
         $pathsRepository->add($path)->shouldBeCalled();
 
-        $responder->goalSuccesfullyEdited($goal)->shouldBeCalled();
+        $responder->goalSuccesfullyEdited($path)->shouldBeCalled();
 
         $command = new Command($userId, $goalId);
         $command->order = 5;
