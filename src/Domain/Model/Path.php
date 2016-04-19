@@ -50,6 +50,15 @@ class Path
         }
     }
 
+    public function getGoal($goalId)
+    {
+      foreach ($this->goals as $goal) {
+          if ($goal->getId() == $goalId) {
+              return $goal;
+          }
+      }
+    }
+
     private function getNextOrderNumber()
     {
         return count($this->goals) + 1;

@@ -44,6 +44,11 @@ class Goal
         return $this->description;
     }
 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
     public function setLevel($level)
     {
         $this->level = $level;
