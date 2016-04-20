@@ -8,19 +8,15 @@ use Domain\Model\Goal;
 class Comment
 {
     private $id;
-    private $userId;
-    private $goalId;
     private $author;
     private $text;
     private $replies;
     private $timestamp;
 
-    public function __construct($userId, $goalId, $author, $text)
+    public function __construct($author, $text)
     {
         $uuid = Uuid::uuid4();
         $this->id = $uuid->toString();
-        $this->userId = $userId;
-        $this->goalId = $goalId;
         $this->author = $author;
         $this->text = $text;
         $this->replies = [];
@@ -30,16 +26,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    public function getGoalId()
-    {
-        return $this->goalId;
     }
 
     public function getAuthor()
@@ -60,5 +46,10 @@ class Comment
     public function getTimestamp()
     {
         return $this->timestamp;
+    }
+
+    public function addReply(Comment $comment)
+    {
+        $this->replies[] = $comment;
     }
 }

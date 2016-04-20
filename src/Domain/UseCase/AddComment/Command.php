@@ -8,6 +8,7 @@ class Command
     public $goalId;
     public $author;
     public $text;
+    public $replyTo;
 
     public function __construct($userId, $goalId, $author, $text)
     {

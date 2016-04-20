@@ -111,4 +111,13 @@ class Goal
     {
         $this->comments[] = $comment;
     }
+
+    public function addCommentReply($replyTo, $comment)
+    {
+        foreach ($this->comments as $existingComment) {
+            if ($existingComment->getId() === $replyTo) {
+                $existingComment->addReply($comment);
+            }
+        }
+    }
 }

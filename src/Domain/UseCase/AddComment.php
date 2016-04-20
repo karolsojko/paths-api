@@ -30,14 +30,13 @@ class AddComment
             return;
         }
 
-        $comment = new Comment(
-            $command->userId,
-            $command->goalId,
-            $command->author,
-            $command->text
-        );
+        $comment = new Comment($command->author, $command->text);
 
-        $goal->addComment($comment);
+        if (isset($command->replyTo)) {
+            $goal->addCommentReply($command->replyTo, $comment);
+        } else {
+            $goal->addComment($comment);
+        }
 
         $this->pathsRepository->add($path);
 

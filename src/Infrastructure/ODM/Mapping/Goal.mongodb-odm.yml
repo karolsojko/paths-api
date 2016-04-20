@@ -22,3 +22,4 @@ Domain\Model\Goal:
     embedMany:
         comments:
             targetDocument: Domain\Model\Comment
+            strategy: setArray
