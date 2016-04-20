@@ -48,6 +48,11 @@ class Comment
         return $this->timestamp;
     }
 
+    public function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
+    }
+
     public function addReply(Comment $comment)
     {
         $this->replies[] = $comment;
