@@ -16,6 +16,7 @@ class Goal
     private $dueDate;
     private $achieved;
     private $comments;
+    private $unread;
 
     public function __construct($name, $description)
     {
@@ -25,6 +26,7 @@ class Goal
         $this->description = $description;
         $this->achieved = false;
         $this->comments = [];
+        $this->unread = 0;
     }
 
     public function getId()
@@ -102,6 +104,11 @@ class Goal
         return $this->icon;
     }
 
+    public function getUnread()
+    {
+        return $this->unread;
+    }
+
     public function getComments()
     {
         return $this->comments;
@@ -110,6 +117,7 @@ class Goal
     public function addComment(Comment $comment)
     {
         $this->comments[] = $comment;
+        $this->unread++;
     }
 
     public function addCommentReply($replyTo, $comment)
