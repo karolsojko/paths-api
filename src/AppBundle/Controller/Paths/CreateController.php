@@ -25,7 +25,12 @@ class CreateController extends FOSRestController implements Responder
      */
     public function postPathsAction(Request $request)
     {
-        $command = new Command($request->get('userId'));
+        $userId = $request->get('userId');
+        if (empty($userId)) {
+            throw new HttpException(400, 'Missing required parameters');
+        }
+
+        $command = new Command($userId);
 
         $useCase = $this->get('app.use_case.add_path');
         $useCase->execute($command, $this);

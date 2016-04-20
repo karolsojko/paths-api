@@ -13,6 +13,7 @@ class Command
     public $order;
     public $dueDate;
     public $achieved;
+    public $unread;
 
     public function __construct($userId, $goalId)
     {

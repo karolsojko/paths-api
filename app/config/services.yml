@@ -22,3 +22,6 @@ services:
     app.use_case.edit_path_goal:
         class: Domain\UseCase\EditGoal
         arguments: ['@app.repository.path']
+    app.use_case.add_path_goal_comment:
+        class: Domain\UseCase\AddComment
+        arguments: ['@app.repository.path']

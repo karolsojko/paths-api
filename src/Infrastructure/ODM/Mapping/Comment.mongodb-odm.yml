@@ -1,27 +1,17 @@
-Domain\Model\Goal:
+Domain\Model\Comment:
     type: embeddedDocument
     fields:
         id:
             type: string
             id: true
             strategy: NONE
-        name:
+        author:
             type: string
-        icon:
+        text:
             type: string
-        description:
-            type: string
-        level:
+        timestamp:
             type: int
-        order:
-            type: int
-        unread:
-            type: int
-        dueDate:
-            type: date
-        achieved:
-            type: boolean
     embedMany:
-        comments:
+        replies:
             targetDocument: Domain\Model\Comment
             strategy: setArray

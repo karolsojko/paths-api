@@ -3,6 +3,7 @@
 namespace Domain\Model;
 
 use Ramsey\Uuid\Uuid;
+use Domain\Model\Comment;
 
 class Goal
 {
@@ -14,6 +15,8 @@ class Goal
     private $order;
     private $dueDate;
     private $achieved;
+    private $comments;
+    private $unread;
 
     public function __construct($name, $description)
     {
@@ -22,6 +25,8 @@ class Goal
         $this->name = $name;
         $this->description = $description;
         $this->achieved = false;
+        $this->comments = [];
+        $this->unread = 0;
     }
 
     public function getId()
@@ -97,5 +102,35 @@ class Goal
     public function getIcon()
     {
         return $this->icon;
+    }
+
+    public function getUnread()
+    {
+        return $this->unread;
+    }
+
+    public function setUnread($unread)
+    {
+        $this->unread = $unread;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+        $this->unread++;
+    }
+
+    public function addCommentReply($replyTo, $comment)
+    {
+        foreach ($this->comments as $existingComment) {
+            if ($existingComment->getId() === $replyTo) {
+                $existingComment->addReply($comment);
+            }
+        }
     }
 }
