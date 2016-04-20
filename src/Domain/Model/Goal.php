@@ -109,6 +109,11 @@ class Goal
         return $this->unread;
     }
 
+    public function setUnread($unread)
+    {
+        $this->unread = $unread;
+    }
+
     public function getComments()
     {
         return $this->comments;

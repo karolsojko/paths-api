@@ -26,6 +26,7 @@ class UpdateController extends FOSRestController implements Responder
      *     {"name"="order", "dataType"="integer", "required"=false, "description"="order number"},
      *     {"name"="dueDate", "dataType"="DateTime", "required"=false, "description"="due date"},
      *     {"name"="achieved", "dataType"="boolean", "required"=false, "description"="goal achieved"},
+     *     {"name"="unread", "dataType"="integer", "required"=false, "description"="unread comments count"},
      *     {"name"="level", "dataType"="integer", "required"=false, "description"="goal level"}
      *   }
      * )
@@ -41,6 +42,7 @@ class UpdateController extends FOSRestController implements Responder
         $command->level = $request->get('level');
         $command->order = $request->get('order');
         $command->dueDate = $request->get('dueDate');
+        $command->unread = $request->get('unread');
         $command->achieved = $request->get('achieved') == 'true';
 
         $useCase->execute($command, $this);

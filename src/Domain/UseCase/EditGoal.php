@@ -50,6 +50,9 @@ class EditGoal
         if (isset($command->achieved)) {
             $goal->setAchieved($command->achieved);
         }
+        if (isset($command->unread)) {
+            $goal->setUnread($command->unread);
+        }
 
         $this->pathsRepository->add($path);
 
