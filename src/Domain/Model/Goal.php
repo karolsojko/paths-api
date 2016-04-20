@@ -3,6 +3,7 @@
 namespace Domain\Model;
 
 use Ramsey\Uuid\Uuid;
+use Domain\Model\Comment;
 
 class Goal
 {
@@ -14,6 +15,7 @@ class Goal
     private $order;
     private $dueDate;
     private $achieved;
+    private $comments;
 
     public function __construct($name, $description)
     {
@@ -22,6 +24,7 @@ class Goal
         $this->name = $name;
         $this->description = $description;
         $this->achieved = false;
+        $this->comments = [];
     }
 
     public function getId()
@@ -97,5 +100,15 @@ class Goal
     public function getIcon()
     {
         return $this->icon;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
     }
 }

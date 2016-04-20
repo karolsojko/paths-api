@@ -19,3 +19,6 @@ Domain\Model\Goal:
             type: date
         achieved:
             type: boolean
+    embedMany:
+        comments:
+            targetDocument: Domain\Model\Comment

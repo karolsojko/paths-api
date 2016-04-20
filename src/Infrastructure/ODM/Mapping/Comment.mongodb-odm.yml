@@ -1,0 +1,19 @@
+Domain\Model\Comment:
+    fields:
+        id:
+            type: string
+            id: true
+            strategy: NONE
+        userId:
+            type: string
+        goalId:
+            type: string
+        author:
+            type: string
+        text:
+            type: string
+        timestamp:
+            type: timestamp
+    embedMany:
+        replies:
+            targetDocument: Domain\Model\Comment
