@@ -31,9 +31,15 @@ class LoadPathData implements FixtureInterface, ContainerAwareInterface
 
             if (!empty($pathData->cards)) {
                 foreach ($pathData->cards as $card) {
-                    $goal = new Goal($card->type, $card->task);
-                    $goal->setIcon($card->icon);
-                    $goal->setOrder($card->order);
+                    $name = isset($card->type) ? $card->type : '';
+                    $description = isset($card->task) ? $card->task : '';
+                    $goal = new Goal($name, $description);
+                    if (isset($card->order)) {
+                        $goal->setOrder($card->order);
+                    }
+                    if (isset($card->icon)) {
+                        $goal->setIcon($card->icon);
+                    }
                     if (isset($card->level)) {
                         $goal->setLevel($card->level);
                     }
