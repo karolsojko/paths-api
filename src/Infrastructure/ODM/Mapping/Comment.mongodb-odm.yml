@@ -10,7 +10,7 @@ Domain\Model\Comment:
         text:
             type: string
         timestamp:
-            type: int
+            type: date
     embedMany:
         replies:
             targetDocument: Domain\Model\Comment
