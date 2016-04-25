@@ -4,6 +4,7 @@ Domain\Model\Path:
             type: string
             id: true
             strategy: NONE
+            serialized_name: userId
     embedMany:
         goals:
             targetDocument: Domain\Model\Goal

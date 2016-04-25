@@ -19,6 +19,7 @@ Domain\Model\Goal:
             type: int
         dueDate:
             type: date
+            serialized_name: dueDate
         achieved:
             type: boolean
     embedMany:
