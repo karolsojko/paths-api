@@ -1,25 +1,36 @@
-web:
-    build: .
-    volumes:
-        - .:/var/www/paths-api
-        - ./docker/php/php.ini:/usr/local/etc/php/php.ini
-        - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    working_dir: /var/www/paths-api
-    expose:
-        - "9000"
-    links:
-        - db
-nginx:
-    image: nginx:1.9
-    volumes_from:
-        - web
-    links:
-        - web
-    ports:
-        - "80:80"
-db:
-    image: mongo:3.2
-    ports:
-        - "27017:27017"
-    volumes:
-        - /mnt/sda1/var/lib/paths-api:/data/db
+version: '2'
+services:
+    web:
+        build: .
+        volumes:
+            - .:/var/www/paths-api
+            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        working_dir: /var/www/paths-api
+        expose:
+            - "9000"
+        links:
+            - db
+    nginx:
+        image: nginx:1.9
+        volumes_from:
+            - web
+        links:
+            - web
+    varnish:
+        image: million12/varnish
+        links:
+            - nginx
+            - web
+        ports:
+            - "80:80"
+        volumes_from:
+            - web
+        environment:
+            VCL_CONFIG: /var/www/paths-api/docker/varnish/varnish.vcl
+    db:
+        image: mongo:3.2
+        ports:
+            - "27017:27017"
+        volumes:
+            - /mnt/sda1/var/lib/paths-api:/data/db

@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class DeleteController extends FOSRestController implements Responder
 {
+    private $userId;
     private $view;
 
     /**
@@ -24,6 +25,7 @@ class DeleteController extends FOSRestController implements Responder
      */
     public function deletePathsGoalsAction($userId, $id)
     {
+        $this->userId = $userId;
         $useCase = $this->get('app.use_case.remove_path_goal');
         $useCase->execute(new Command($userId, $id), $this);
 
@@ -33,6 +35,11 @@ class DeleteController extends FOSRestController implements Responder
     public function goalSuccessfullyRemovedFromPath(Path $path)
     {
         $this->view = $this->view(null, 204);
+
+        $cacheManager = $this->get('fos_http_cache.cache_manager');
+        $cacheManager
+            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->flush();
     }
 
     public function pathNotFound($userId)
