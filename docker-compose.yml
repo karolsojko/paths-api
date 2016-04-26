@@ -24,10 +24,10 @@ services:
             - web
         ports:
             - "80:80"
-        volumes:
-            - ./docker/varnish/varnish.vcl:/data/varnish.vcl
+        volumes_from:
+            - web
         environment:
-            VCL_CONFIG: /data/varnish.vcl
+            VCL_CONFIG: /var/www/paths-api/docker/varnish/varnish.vcl
     db:
         image: mongo:3.2
         ports:
