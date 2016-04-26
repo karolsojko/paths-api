@@ -23,7 +23,7 @@ framework:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
+    trusted_proxies:  [192.0.0.1, 10.0.0.0/8]
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
@@ -107,3 +107,21 @@ nelmio_cors:
             allow_headers: ['*']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE', 'OPTIONS']
             max_age: 3600
+
+fos_http_cache:
+    proxy_client:
+        varnish:
+            servers: varnish
+    cache_control:
+        defaults:
+            overwrite: false
+        rules:
+            -
+                match:
+                    path: ^/api/
+                headers:
+                    cache_control:
+                        public: true
+                        max_age: 604800
+                        s_maxage: 1209600
+                    etag: true

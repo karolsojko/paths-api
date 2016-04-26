@@ -15,8 +15,6 @@ paths-nginx:
         - paths-web
     links:
         - paths-web:web
-    ports:
-        - "80"
     environment:
         - VIRTUAL_HOST=your.domain.com
     restart: always
@@ -26,4 +24,16 @@ paths-db:
         - "27017"
     volumes:
         - /mnt/sda1/var/lib/paths-api:/data/db
+    restart: always
+paths-varnish:
+    image: million12/varnish
+    links:
+        - paths-nginx:nginx
+        - paths-web:web
+    ports:
+        - "80"
+    volumes_from:
+        - paths-web
+    environment:
+        VCL_CONFIG: /var/www/paths-api/docker/varnish/varnish.vcl
     restart: always

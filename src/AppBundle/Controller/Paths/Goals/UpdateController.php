@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UpdateController extends FOSRestController implements Responder
 {
+    private $userId;
     private $view;
 
     /**
@@ -33,6 +34,7 @@ class UpdateController extends FOSRestController implements Responder
      */
     public function putPathsGoalsAction($userId, $id, Request $request)
     {
+        $this->userId = $userId;
         $useCase = $this->get('app.use_case.edit_path_goal');
 
         $command = new Command($userId, $id);
@@ -53,6 +55,11 @@ class UpdateController extends FOSRestController implements Responder
     public function goalSuccesfullyEdited(Path $path)
     {
         $this->view = $this->view($path);
+
+        $cacheManager = $this->get('fos_http_cache.cache_manager');
+        $cacheManager
+            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->flush();
     }
 
     public function pathNotFound($userId)
