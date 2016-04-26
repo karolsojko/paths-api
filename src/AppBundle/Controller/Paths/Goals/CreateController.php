@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class CreateController extends FOSRestController implements Responder
 {
     private $view;
+    private $userId;
 
     /**
      * @ApiDoc(
@@ -31,6 +32,7 @@ class CreateController extends FOSRestController implements Responder
      */
     public function postPathsGoalsAction($userId, Request $request)
     {
+        $this->userId = $userId;
         $useCase = $this->get('app.use_case.add_path_goal');
 
         $name = $request->get('name');
@@ -67,6 +69,11 @@ class CreateController extends FOSRestController implements Responder
     public function goalSuccessfullyAddedToPath(Path $path)
     {
         $this->view = $this->view($path);
+
+        $cacheManager = $this->get('fos_http_cache.cache_manager');
+        $cacheManager
+            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->flush();
     }
 
     public function pathNotFound($userId)
