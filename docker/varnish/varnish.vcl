@@ -20,4 +20,15 @@ sub vcl_recv {
 
 sub vcl_deliver {
   set resp.http.Access-Control-Allow-Origin = "*";
+  set resp.http.Access-Control-Allow-Credentials = "true";
+
+  if (req.method == "OPTIONS") {
+      set resp.http.Access-Control-Max-Age = "1728000";
+      set resp.http.Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, PATCH, OPTIONS";
+      set resp.http.Access-Control-Allow-Headers = "Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since";
+
+      set resp.http.Content-Length = "0";
+      set resp.http.Content-Type = "text/plain charset=UTF-8";
+      set resp.status = 204;
+  }
 }
