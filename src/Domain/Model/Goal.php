@@ -17,6 +17,7 @@ class Goal
     private $achieved;
     private $comments;
     private $unread;
+    private $lastNotificationSent;
 
     public function __construct($name, $description)
     {
@@ -132,5 +133,15 @@ class Goal
                 $existingComment->addReply($comment);
             }
         }
+    }
+
+    public function getLastNotificationSent()
+    {
+        return $this->lastNotificationSent;
+    }
+
+    public function setLastNotificationSent($lastNotificationSent)
+    {
+        $this->lastNotificationSent = $lastNotificationSent;
     }
 }
