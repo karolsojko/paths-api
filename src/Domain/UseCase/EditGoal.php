@@ -53,6 +53,9 @@ class EditGoal
         if (isset($command->unread)) {
             $goal->setUnread($command->unread);
         }
+        if (isset($command->lastNotificationSent)) {
+            $goal->setLastNotificationSent($command->lastNotificationSent);
+        }
 
         $this->pathsRepository->add($path);
 

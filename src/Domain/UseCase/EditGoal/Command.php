@@ -14,6 +14,7 @@ class Command
     public $dueDate;
     public $achieved;
     public $unread;
+    public $lastNotificationSent;
 
     public function __construct($userId, $goalId)
     {

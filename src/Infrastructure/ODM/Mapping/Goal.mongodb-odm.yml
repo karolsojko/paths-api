@@ -22,6 +22,8 @@ Domain\Model\Goal:
             serialized_name: dueDate
         achieved:
             type: boolean
+        lastNotificationSent:
+            type: int
     embedMany:
         comments:
             targetDocument: Domain\Model\Comment

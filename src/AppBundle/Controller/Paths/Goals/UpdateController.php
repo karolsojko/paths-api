@@ -17,7 +17,7 @@ class UpdateController extends FOSRestController implements Responder
     /**
      * @ApiDoc(
      *   resource=true,
-     *   description="Delete a goal from path",
+     *   description="Update a goal on path",
      *   parameters={
      *     {"name"="userId", "dataType"="string", "required"=true, "description"="path id"},
      *     {"name"="id", "dataType"="string", "required"=true, "description"="goal id"},
@@ -28,6 +28,7 @@ class UpdateController extends FOSRestController implements Responder
      *     {"name"="dueDate", "dataType"="DateTime", "required"=false, "description"="due date"},
      *     {"name"="achieved", "dataType"="boolean", "required"=false, "description"="goal achieved"},
      *     {"name"="unread", "dataType"="integer", "required"=false, "description"="unread comments count"},
+     *     {"name"="lastNotificationSent", "dataType"="integer", "required"=false, "description"="last notification sent days ago"},
      *     {"name"="level", "dataType"="integer", "required"=false, "description"="goal level"}
      *   }
      * )
@@ -45,6 +46,7 @@ class UpdateController extends FOSRestController implements Responder
         $command->order = $request->get('order');
         $command->dueDate = $request->get('dueDate');
         $command->unread = $request->get('unread');
+        $command->lastNotificationSent = $request->get('lastNotificationSent');
         $command->achieved = $request->get('achieved') == 'true';
 
         $useCase->execute($command, $this);
