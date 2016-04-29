@@ -111,7 +111,7 @@ nelmio_cors:
 fos_http_cache:
     proxy_client:
         varnish:
-            servers: varnish
+            servers: %varnish_host%
     cache_control:
         defaults:
             overwrite: false
