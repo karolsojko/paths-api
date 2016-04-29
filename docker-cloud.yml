@@ -4,6 +4,8 @@ paths-web:
         - /var/www/paths-api
         - /etc/nginx/conf.d
     working_dir: /var/www/paths-api
+    environment:
+        SYMFONY__VARNISH_HOST: paths-varnish
     expose:
         - "9000"
     links:
