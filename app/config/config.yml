@@ -122,6 +122,4 @@ fos_http_cache:
                 headers:
                     cache_control:
                         public: true
-                        max_age: 604800
-                        s_maxage: 1209600
                     etag: true
