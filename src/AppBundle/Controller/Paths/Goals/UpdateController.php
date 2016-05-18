@@ -45,6 +45,9 @@ class UpdateController extends FOSRestController implements Responder
         $command->level = $request->get('level');
         $command->order = $request->get('order');
         $command->dueDate = $request->get('dueDate');
+        if (empty($command->dueDate) && $request->request->has('dueDate')) {
+            $command->unsetDueDate = true;
+        }
         $command->unread = $request->get('unread');
         $command->lastNotificationSent = $request->get('lastNotificationSent');
         $command->achieved = $request->get('achieved') == 'true';

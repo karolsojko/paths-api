@@ -3,7 +3,6 @@
 namespace Domain\Model;
 
 use Ramsey\Uuid\Uuid;
-use Domain\Model\Goal;
 
 class Comment
 {
