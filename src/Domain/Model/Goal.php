@@ -3,7 +3,6 @@
 namespace Domain\Model;
 
 use Ramsey\Uuid\Uuid;
-use Domain\Model\Comment;
 
 class Goal
 {
@@ -93,6 +92,11 @@ class Goal
     public function setDueDate($dueDate)
     {
         $this->dueDate = $dueDate;
+    }
+
+    public function unsetDueDate()
+    {
+        $this->dueDate = null;
     }
 
     public function setIcon($icon)

@@ -2,8 +2,6 @@
 
 namespace Domain\Model;
 
-use Domain\Model\Goal;
-
 class Path
 {
     private $userId;

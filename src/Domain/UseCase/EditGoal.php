@@ -47,6 +47,9 @@ class EditGoal
         if (isset($command->dueDate)) {
             $goal->setDueDate($command->dueDate);
         }
+        if ($command->unsetDueDate) {
+            $goal->unsetDueDate();
+        }
         if (isset($command->achieved)) {
             $goal->setAchieved($command->achieved);
         }
