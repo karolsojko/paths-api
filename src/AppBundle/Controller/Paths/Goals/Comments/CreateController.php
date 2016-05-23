@@ -22,7 +22,8 @@ class CreateController extends FOSRestController implements Responder
      *   parameters={
      *     {"name"="userId", "dataType"="string", "required"=true, "description"="user id"},
      *     {"name"="goalId", "dataType"="string", "required"=true, "description"="goal id"},
-     *     {"name"="author", "dataType"="string", "required"=true, "description"="author"},
+     *     {"name"="author", "dataType"="string", "required"=true, "description"="author user name"},
+     *     {"name"="authorDisplayName", "dataType"="string", "required"=false, "description"="author display name"},
      *     {"name"="text", "dataType"="string", "required"=true, "description"="text"},
      *     {"name"="replyTo", "dataType"="string", "required"=false, "description"="id of comment to reply"}
      *   }
@@ -34,6 +35,7 @@ class CreateController extends FOSRestController implements Responder
         $useCase = $this->get('app.use_case.add_path_goal_comment');
 
         $author = $request->get('author');
+        $authorDisplayName = $request->get('authorDisplayName');
         $text = $request->get('text');
         $replyTo = $request->get('replyTo');
 
@@ -42,6 +44,7 @@ class CreateController extends FOSRestController implements Responder
         }
 
         $command = new Command($userId, $goalId, $author, $text);
+        $command->authorDisplayName = $authorDisplayName;
         $command->replyTo = $replyTo;
 
         $useCase->execute($command, $this);

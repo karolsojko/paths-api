@@ -7,6 +7,7 @@ class Command
     public $userId;
     public $goalId;
     public $author;
+    public $authorDisplayName;
     public $text;
     public $replyTo;
 
