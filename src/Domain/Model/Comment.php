@@ -8,6 +8,7 @@ class Comment
 {
     private $id;
     private $author;
+    private $authorDisplayName;
     private $text;
     private $replies;
     private $timestamp;
@@ -50,6 +51,16 @@ class Comment
     public function setTimestamp($timestamp)
     {
         $this->timestamp = $timestamp;
+    }
+
+    public function setAuthorDisplayName($authorDisplayName)
+    {
+        $this->authorDisplayName = $authorDisplayName;
+    }
+
+    public function getAuthorDisplayName()
+    {
+        return $this->authorDisplayName;
     }
 
     public function addReply(Comment $comment)

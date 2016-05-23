@@ -31,6 +31,7 @@ class AddComment
         }
 
         $comment = new Comment($command->author, $command->text);
+        $comment->setAuthorDisplayName($command->authorDisplayName);
 
         if (isset($command->replyTo)) {
             $goal->addCommentReply($command->replyTo, $comment);
