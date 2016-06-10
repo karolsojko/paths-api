@@ -25,4 +25,12 @@ class PathsRepository implements PathsRepositoryInterface
         $this->manager->persist($path);
         $this->manager->flush();
     }
+
+    public function findByUserId($userId)
+    {
+        return $this
+            ->manager
+            ->getRepository(Path::class)
+            ->findBy(['userId' => $userId]);
+    }
 }
