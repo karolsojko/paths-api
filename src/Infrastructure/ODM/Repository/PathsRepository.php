@@ -15,9 +15,9 @@ class PathsRepository implements PathsRepositoryInterface
         $this->manager = $manager;
     }
 
-    public function find($userId)
+    public function find($id)
     {
-        return $this->manager->getRepository(Path::class)->find($userId);
+        return $this->manager->getRepository(Path::class)->find($id);
     }
 
     public function add(Path $path)

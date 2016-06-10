@@ -19,10 +19,10 @@ class ReadController extends FOSRestController implements Responder
      *   description="Get path details"
      * )
      */
-    public function getPathsAction($userId)
+    public function getPathsAction($id)
     {
         $useCase = $this->get('app.use_case.get_path');
-        $useCase->execute(new Command($userId), $this);
+        $useCase->execute(new Command($id), $this);
 
         return $this->handleView($this->view);
     }
@@ -32,7 +32,7 @@ class ReadController extends FOSRestController implements Responder
         $this->view = $this->view($path);
     }
 
-    public function pathNotFound($userId)
+    public function pathNotFound($id)
     {
         throw $this->createNotFoundException('Path does not exist');
     }
