@@ -18,17 +18,17 @@ class AddGoal
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = $this->pathsRepository->find($command->getUserId());
+        $path = $this->pathsRepository->find($command->id);
         if (empty($path)) {
-            $responder->pathNotFound($command->getUserId());
+            $responder->pathNotFound($command->id);
             return;
         }
 
-        $goal = new Goal($command->getName(), $command->getDescription());
-        $goal->setIcon($command->getIcon());
-        $goal->setLevel($command->getLevel());
-        $goal->setOrder($command->getOrder());
-        $goal->setDueDate($command->getDueDate());
+        $goal = new Goal($command->name, $command->description);
+        $goal->setIcon($command->icon);
+        $goal->setLevel($command->level);
+        $goal->setOrder($command->order);
+        $goal->setDueDate($command->dueDate);
 
         $path->addGoal($goal);
 
