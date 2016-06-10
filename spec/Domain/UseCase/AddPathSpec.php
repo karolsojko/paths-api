@@ -28,16 +28,4 @@ class AddPathSpec extends ObjectBehavior
 
         $this->execute(new Command($userId), $responder);
     }
-
-    function it_should_not_create_duplicate_paths_for_same_user(
-        PathsRepository $pathsRepository,
-        Path $path,
-        Responder $responder
-    ) {
-        $pathsRepository->find($userId = 1)->willReturn($path);
-
-        $responder->pathAlreadyExists($path)->shouldBeCalled();
-
-        $this->execute(new Command($userId), $responder);
-    }
 }

@@ -18,12 +18,6 @@ class AddPath
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = $this->pathsRepository->find($command->getUserId());
-        if (!empty($path)) {
-            $responder->pathAlreadyExists($path);
-            return;
-        }
-
         $path = new Path($command->getUserId());
 
         $this->pathsRepository->add($path);
