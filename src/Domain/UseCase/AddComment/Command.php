@@ -4,16 +4,16 @@ namespace Domain\UseCase\AddComment;
 
 class Command
 {
-    public $userId;
+    public $id;
     public $goalId;
     public $author;
     public $authorDisplayName;
     public $text;
     public $replyTo;
 
-    public function __construct($userId, $goalId, $author, $text)
+    public function __construct($id, $goalId, $author, $text)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $this->goalId = $goalId;
         $this->author = $author;
         $this->text = $text;

@@ -18,9 +18,9 @@ class AddComment
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = $this->pathsRepository->find($command->userId);
+        $path = $this->pathsRepository->find($command->id);
         if (empty($path)) {
-            $responder->pathNotFound($command->userId);
+            $responder->pathNotFound($command->id);
             return;
         }
 

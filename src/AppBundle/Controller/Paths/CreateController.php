@@ -42,9 +42,4 @@ class CreateController extends FOSRestController implements Responder
     {
         $this->view = $this->view($path);
     }
-
-    public function pathAlreadyExists(Path $path)
-    {
-        throw new HttpException(409, 'Path already exists');
-    }
 }

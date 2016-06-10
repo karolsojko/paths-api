@@ -3,11 +3,10 @@
 namespace Domain\UseCase;
 
 use Domain\Repository\PathsRepository;
-use Domain\UseCase\AddPath\Command;
-use Domain\UseCase\AddPath\Responder;
-use Domain\Model\Path;
+use Domain\UseCase\GetPaths\Command;
+use Domain\UseCase\GetPaths\Responder;
 
-class AddPath
+class GetPaths
 {
     private $pathsRepository;
 
@@ -18,10 +17,8 @@ class AddPath
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = new Path($command->getUserId());
+        $paths = $this->pathsRepository->findByUserId($command->userId);
 
-        $this->pathsRepository->add($path);
-
-        $responder->pathSuccessfullyCreated($path);
+        $responder->pathsSuccessfullyRetrieved($paths);
     }
 }

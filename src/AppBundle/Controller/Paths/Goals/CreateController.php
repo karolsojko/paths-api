@@ -13,14 +13,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class CreateController extends FOSRestController implements Responder
 {
     private $view;
-    private $userId;
+    private $id;
 
     /**
      * @ApiDoc(
      *   resource=true,
      *   description="Create a goal",
      *   parameters={
-     *     {"name"="userId", "dataType"="string", "required"=true, "description"="user id"},
+     *     {"name"="id", "dataType"="string", "required"=true, "description"="path id"},
      *     {"name"="name", "dataType"="string", "required"=true, "description"="goal name"},
      *     {"name"="description", "dataType"="string", "required"=true, "description"="goal description"},
      *     {"name"="icon", "dataType"="string", "required"=false, "description"="goal icon url"},
@@ -30,9 +30,9 @@ class CreateController extends FOSRestController implements Responder
      *   }
      * )
      */
-    public function postPathsGoalsAction($userId, Request $request)
+    public function postPathsGoalsAction($id, Request $request)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $useCase = $this->get('app.use_case.add_path_goal');
 
         $name = $request->get('name');
@@ -46,19 +46,19 @@ class CreateController extends FOSRestController implements Responder
             throw new HttpException(400, 'Missing required parameters');
         }
 
-        $command = new Command($userId, $name, $description);
+        $command = new Command($id, $name, $description);
 
         if (!empty($icon)) {
-            $command->setIcon($icon);
+            $command->icon = $icon;
         }
         if (!empty($level)) {
-            $command->setLevel($level);
+            $command->level = $level;
         }
         if (isset($order)) {
-            $command->setOrder($order);
+            $command->order = $order;
         }
         if (!empty($dueDate)) {
-            $command->setDueDate($dueDate);
+            $command->dueDate = $dueDate;
         }
 
         $useCase->execute($command, $this);
@@ -72,11 +72,12 @@ class CreateController extends FOSRestController implements Responder
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->invalidateRoute('get_path', array('id' => $this->id))
+            ->invalidateRoute('get_paths')
             ->flush();
     }
 
-    public function pathNotFound($userId)
+    public function pathNotFound($id)
     {
         throw $this->createNotFoundException('Path does not exist');
     }

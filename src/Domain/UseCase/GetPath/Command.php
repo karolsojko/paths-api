@@ -4,15 +4,10 @@ namespace Domain\UseCase\GetPath;
 
 class Command
 {
-    private $userId;
+    public $id;
 
-    public function __construct($userId)
+    public function __construct($id)
     {
-        $this->userId = $userId;
-    }
-
-    public function getUserId()
-    {
-        return $this->userId;
+        $this->id = $id;
     }
 }

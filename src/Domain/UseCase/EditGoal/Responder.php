@@ -6,7 +6,7 @@ use Domain\Model\Path;
 
 interface Responder
 {
-    public function pathNotFound($userId);
+    public function pathNotFound($id);
 
     public function goalSuccesfullyEdited(Path $path);
 
