@@ -6,6 +6,4 @@ use Domain\Model\Path;
 interface Responder
 {
     public function pathSuccessfullyCreated(Path $path);
-
-    public function pathAlreadyExists(Path $path);
 }

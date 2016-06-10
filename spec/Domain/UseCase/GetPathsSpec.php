@@ -5,11 +5,11 @@ namespace spec\Domain\UseCase;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Domain\Repository\PathsRepository;
-use Domain\UseCase\AddPath\Responder;
-use Domain\UseCase\AddPath\Command;
+use Domain\UseCase\GetPaths\Responder;
+use Domain\UseCase\GetPaths\Command;
 use Domain\Model\Path;
 
-class AddPathSpec extends ObjectBehavior
+class GetPathsSpec extends ObjectBehavior
 {
     function let(PathsRepository $pathsRepository)
     {
@@ -20,11 +20,9 @@ class AddPathSpec extends ObjectBehavior
         PathsRepository $pathsRepository,
         Responder $responder
     ) {
-        $pathsRepository->find($userId = 1)->willReturn(null);
+        $pathsRepository->findByUserId($userId = 1)->willReturn($paths = [new Path($userId)]);
 
-        $pathsRepository->add(Argument::type(Path::class))->shouldBeCalled();
-
-        $responder->pathSuccessfullyCreated(Argument::type(Path::class))->shouldBeCalled();
+        $responder->pathsSuccessfullyRetrieved($paths)->shouldBeCalled();
 
         $this->execute(new Command($userId), $responder);
     }

@@ -5,7 +5,7 @@ use Domain\Model\Goal;
 
 interface Responder
 {
-    public function pathNotFound($userId);
+    public function pathNotFound($id);
 
     public function goalNotFound($goalId);
 

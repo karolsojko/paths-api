@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UpdateController extends FOSRestController implements Responder
 {
-    private $userId;
+    private $id;
     private $view;
 
     /**
@@ -19,8 +19,8 @@ class UpdateController extends FOSRestController implements Responder
      *   resource=true,
      *   description="Update a goal on path",
      *   parameters={
-     *     {"name"="userId", "dataType"="string", "required"=true, "description"="path id"},
-     *     {"name"="id", "dataType"="string", "required"=true, "description"="goal id"},
+     *     {"name"="id", "dataType"="string", "required"=true, "description"="path id"},
+     *     {"name"="goalId", "dataType"="string", "required"=true, "description"="goal id"},
      *     {"name"="name", "dataType"="string", "required"=false, "description"="goal name"},
      *     {"name"="description", "dataType"="string", "required"=false, "description"="goal description"},
      *     {"name"="icon", "dataType"="string", "required"=false, "description"="goal icon url"},
@@ -33,12 +33,12 @@ class UpdateController extends FOSRestController implements Responder
      *   }
      * )
      */
-    public function putPathsGoalsAction($userId, $id, Request $request)
+    public function putPathsGoalsAction($id, $goalId, Request $request)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $useCase = $this->get('app.use_case.edit_path_goal');
 
-        $command = new Command($userId, $id);
+        $command = new Command($id, $goalId);
         $command->name = $request->get('name');
         $command->description = $request->get('description');
         $command->icon = $request->get('icon');
@@ -63,11 +63,12 @@ class UpdateController extends FOSRestController implements Responder
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->invalidateRoute('get_path', array('id' => $this->id))
+            ->invalidateRoute('get_paths')
             ->flush();
     }
 
-    public function pathNotFound($userId)
+    public function pathNotFound($id)
     {
         throw $this->createNotFoundException('Path does not exist');
     }

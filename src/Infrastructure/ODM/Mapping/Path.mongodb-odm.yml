@@ -1,10 +1,11 @@
 Domain\Model\Path:
     fields:
-        userId:
+        id:
             type: string
             id: true
             strategy: NONE
-            serialized_name: userId
+        userId:
+            type: string
     embedMany:
         goals:
             targetDocument: Domain\Model\Goal

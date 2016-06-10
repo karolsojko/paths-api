@@ -4,22 +4,12 @@ namespace Domain\UseCase\RemoveGoal;
 
 class Command
 {
-    private $userId;
-    private $goalId;
+    public $id;
+    public $goalId;
 
-    public function __construct($userId, $goalId)
+    public function __construct($id, $goalId)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $this->goalId = $goalId;
-    }
-
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    public function getGoalId()
-    {
-        return $this->goalId;
     }
 }

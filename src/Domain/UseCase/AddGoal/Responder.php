@@ -8,5 +8,5 @@ interface Responder
 {
     public function goalSuccessfullyAddedToPath(Path $path);
 
-    public function pathNotFound($userId);
+    public function pathNotFound($id);
 }
