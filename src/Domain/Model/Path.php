@@ -2,15 +2,25 @@
 
 namespace Domain\Model;
 
+use Ramsey\Uuid\Uuid;
+
 class Path
 {
+    private $id;
     private $userId;
     private $goals;
 
     public function __construct($userId)
     {
+        $uuid = Uuid::uuid4();
+        $this->id = $uuid->toString();
         $this->userId = $userId;
         $this->goals = [];
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getUserId()
