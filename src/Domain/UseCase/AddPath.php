@@ -18,10 +18,10 @@ class AddPath
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = new Path($command->getUserId());
+        $this->pathsRepository->add(new Path($command->userId));
 
-        $this->pathsRepository->add($path);
+        $paths = $this->pathsRepository->findByUserId($command->userId);
 
-        $responder->pathSuccessfullyCreated($path);
+        $responder->pathSuccessfullyCreated($paths);
     }
 }
