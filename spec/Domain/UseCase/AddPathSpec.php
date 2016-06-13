@@ -16,15 +16,15 @@ class AddPathSpec extends ObjectBehavior
         $this->beConstructedWith($pathsRepository);
     }
 
-    function it_should_retrieve_a_path_and_notify_the_responder(
+    function it_should_add_a_path_and_notify_the_responder(
         PathsRepository $pathsRepository,
         Responder $responder
     ) {
-        $pathsRepository->find($userId = 1)->willReturn(null);
-
         $pathsRepository->add(Argument::type(Path::class))->shouldBeCalled();
 
-        $responder->pathSuccessfullyCreated(Argument::type(Path::class))->shouldBeCalled();
+        $pathsRepository->findByUserId($userId = 1)->willReturn($paths = []);
+
+        $responder->pathSuccessfullyCreated($paths)->shouldBeCalled();
 
         $this->execute(new Command($userId), $responder);
     }

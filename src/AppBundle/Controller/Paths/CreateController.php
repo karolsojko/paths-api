@@ -38,8 +38,13 @@ class CreateController extends FOSRestController implements Responder
         return $this->handleView($this->view);
     }
 
-    public function pathSuccessfullyCreated(Path $path)
+    public function pathSuccessfullyCreated($paths)
     {
-        $this->view = $this->view($path);
+        $this->view = $this->view($paths);
+
+        $cacheManager = $this->get('fos_http_cache.cache_manager');
+        $cacheManager
+            ->invalidateRoute('get_paths')
+            ->flush();
     }
 }
