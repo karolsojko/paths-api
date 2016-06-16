@@ -63,8 +63,8 @@ class UpdateController extends FOSRestController implements Responder
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_path', array('id' => $this->id))
-            ->invalidateRoute('get_paths')
+            ->invalidateRoute('get_path', ['id' => $this->id])
+            ->invalidateRoute('get_paths', ['userId' => $path->getUserId()])
             ->flush();
     }
 

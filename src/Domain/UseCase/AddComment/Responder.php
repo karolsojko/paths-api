@@ -9,5 +9,5 @@ interface Responder
 
     public function goalNotFound($goalId);
 
-    public function commentSuccesfullyAdded(Goal $goal);
+    public function commentSuccesfullyAdded(Goal $goal, $pathOwnerId);
 }

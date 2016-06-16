@@ -27,12 +27,13 @@ class AddCommentSpec extends ObjectBehavior
         $pathsRepository->find($userId = 1)->willReturn($path);
 
         $path->getGoal($goalId = 2)->willReturn($goal);
+        $path->getUserId()->willReturn($userId);
 
         $goal->addComment(Argument::type(Comment::class))->shouldBeCalled();
 
         $pathsRepository->add($path)->shouldBeCalled();
 
-        $responder->commentSuccesfullyAdded($goal)->shouldBeCalled();
+        $responder->commentSuccesfullyAdded($goal, $userId)->shouldBeCalled();
 
         $command =
             new Command($userId, $goalId, $author = 'John Doe', $text = 'test');
