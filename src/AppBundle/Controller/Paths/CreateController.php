@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class CreateController extends FOSRestController implements Responder
 {
     private $view;
+    private $userId;
 
     /**
      * @ApiDoc(
@@ -30,7 +31,8 @@ class CreateController extends FOSRestController implements Responder
             throw new HttpException(400, 'Missing required parameters');
         }
 
-        $command = new Command($userId);
+        $this->userId = $userId;
+        $command = new Command($this->userId);
 
         $useCase = $this->get('app.use_case.add_path');
         $useCase->execute($command, $this);
@@ -44,7 +46,7 @@ class CreateController extends FOSRestController implements Responder
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_paths')
+            ->invalidateRoute('get_paths', ['userId' => $this->userId])
             ->flush();
     }
 }

@@ -41,6 +41,6 @@ class AddComment
 
         $this->pathsRepository->add($path);
 
-        $responder->commentSuccesfullyAdded($goal);
+        $responder->commentSuccesfullyAdded($goal, $path->getUserId());
     }
 }
