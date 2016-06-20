@@ -50,7 +50,9 @@ class UpdateController extends FOSRestController implements Responder
         }
         $command->unread = $request->get('unread');
         $command->lastNotificationSent = $request->get('lastNotificationSent');
-        $command->achieved = $request->get('achieved') == 'true';
+        if ($request->request->has('achieved')) {
+            $command->achieved = $request->get('achieved') == 'true';
+        }
 
         $useCase->execute($command, $this);
 
