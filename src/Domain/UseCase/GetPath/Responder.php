@@ -7,5 +7,5 @@ interface Responder
 {
     public function pathSuccessfullyRetrieved(Path $path);
 
-    public function pathNotFound($userId);
+    public function pathNotFound($id);
 }

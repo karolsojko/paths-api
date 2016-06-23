@@ -13,14 +13,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class CreateController extends FOSRestController implements Responder
 {
     private $view;
-    private $userId;
+    private $id;
 
     /**
      * @ApiDoc(
      *   resource=true,
      *   description="Create a comment",
      *   parameters={
-     *     {"name"="userId", "dataType"="string", "required"=true, "description"="user id"},
+     *     {"name"="id", "dataType"="string", "required"=true, "description"="path id"},
      *     {"name"="goalId", "dataType"="string", "required"=true, "description"="goal id"},
      *     {"name"="author", "dataType"="string", "required"=true, "description"="author user name"},
      *     {"name"="authorDisplayName", "dataType"="string", "required"=false, "description"="author display name"},
@@ -29,9 +29,9 @@ class CreateController extends FOSRestController implements Responder
      *   }
      * )
      */
-    public function postPathsGoalsCommentsAction($userId, $goalId, Request $request)
+    public function postPathsGoalsCommentsAction($id, $goalId, Request $request)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $useCase = $this->get('app.use_case.add_path_goal_comment');
 
         $author = $request->get('author');
@@ -43,7 +43,7 @@ class CreateController extends FOSRestController implements Responder
             throw new HttpException(400, 'Missing required parameters');
         }
 
-        $command = new Command($userId, $goalId, $author, $text);
+        $command = new Command($id, $goalId, $author, $text);
         $command->authorDisplayName = $authorDisplayName;
         $command->replyTo = $replyTo;
 
@@ -52,17 +52,18 @@ class CreateController extends FOSRestController implements Responder
         return $this->handleView($this->view);
     }
 
-    public function commentSuccesfullyAdded(Goal $goal)
+    public function commentSuccesfullyAdded(Goal $goal, $pathOwnerId)
     {
         $this->view = $this->view($goal);
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->invalidateRoute('get_path', ['id' => $this->id])
+            ->invalidateRoute('get_paths', ['userId' => $pathOwnerId])
             ->flush();
     }
 
-    public function pathNotFound($userId)
+    public function pathNotFound($id)
     {
         throw $this->createNotFoundException('Path does not exist');
     }

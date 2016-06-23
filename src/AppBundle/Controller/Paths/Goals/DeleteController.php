@@ -10,7 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class DeleteController extends FOSRestController implements Responder
 {
-    private $userId;
+    private $id;
     private $view;
 
     /**
@@ -18,16 +18,16 @@ class DeleteController extends FOSRestController implements Responder
      *   resource=true,
      *   description="Delete a goal from path",
      *   parameters={
-     *     {"name"="userId", "dataType"="string", "description"="path id"},
-     *     {"name"="id", "dataType"="string", "required"=true, "description"="goal id"}
+     *     {"name"="id", "dataType"="string", "description"="path id"},
+     *     {"name"="goalId", "dataType"="string", "required"=true, "description"="goal id"}
      *   }
      * )
      */
-    public function deletePathsGoalsAction($userId, $id)
+    public function deletePathsGoalsAction($id, $goalId)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $useCase = $this->get('app.use_case.remove_path_goal');
-        $useCase->execute(new Command($userId, $id), $this);
+        $useCase->execute(new Command($id, $goalId), $this);
 
         return $this->handleView($this->view);
     }
@@ -38,11 +38,12 @@ class DeleteController extends FOSRestController implements Responder
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager
-            ->invalidateRoute('get_paths', array('userId' => $this->userId))
+            ->invalidateRoute('get_path', ['id' => $this->id])
+            ->invalidateRoute('get_paths', ['userId' => $path->getUserId()])
             ->flush();
     }
 
-    public function pathNotFound($userId)
+    public function pathNotFound($id)
     {
         throw $this->createNotFoundException('Path does not exist');
     }

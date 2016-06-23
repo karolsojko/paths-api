@@ -17,9 +17,9 @@ class GetPath
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = $this->pathsRepository->find($command->getUserId());
+        $path = $this->pathsRepository->find($command->id);
         if (empty($path)) {
-            $responder->pathNotFound($command->getUserId());
+            $responder->pathNotFound($command->id);
             return;
         }
 

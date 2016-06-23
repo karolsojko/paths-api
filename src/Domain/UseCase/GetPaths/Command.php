@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\UseCase\AddPath;
+namespace Domain\UseCase\GetPaths;
 
 class Command
 {

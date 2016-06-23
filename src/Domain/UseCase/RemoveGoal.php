@@ -18,13 +18,13 @@ class RemoveGoal
 
     public function execute(Command $command, Responder $responder)
     {
-        $path = $this->pathsRepository->find($command->getUserId());
+        $path = $this->pathsRepository->find($command->id);
         if (empty($path)) {
-            $responder->pathNotFound($command->getUserId());
+            $responder->pathNotFound($command->id);
             return;
         }
 
-        $path->removeGoal($command->getGoalId());
+        $path->removeGoal($command->goalId);
 
         $this->pathsRepository->add($path);
 

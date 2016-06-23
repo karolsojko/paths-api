@@ -4,7 +4,7 @@ namespace Domain\UseCase\EditGoal;
 
 class Command
 {
-    public $userId;
+    public $id;
     public $goalId;
     public $name;
     public $description;
@@ -17,9 +17,9 @@ class Command
     public $lastNotificationSent;
     public $unsetDueDate = false;
 
-    public function __construct($userId, $goalId)
+    public function __construct($id, $goalId)
     {
-        $this->userId = $userId;
+        $this->id = $id;
         $this->goalId = $goalId;
     }
 }

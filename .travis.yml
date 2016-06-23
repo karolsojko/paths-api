@@ -28,3 +28,8 @@ deploy:
     script: ./deploy.sh latest
     on:
       branch: master
+  - provider: script
+    skip_cleanup: true
+    script: ./deploy.sh staging
+    on:
+      branch: develop

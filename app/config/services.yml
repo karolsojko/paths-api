@@ -10,6 +10,9 @@ services:
     app.use_case.get_path:
         class: Domain\UseCase\GetPath
         arguments: ['@app.repository.path']
+    app.use_case.get_paths:
+        class: Domain\UseCase\GetPaths
+        arguments: ['@app.repository.path']
     app.use_case.add_path:
         class: Domain\UseCase\AddPath
         arguments: ['@app.repository.path']
