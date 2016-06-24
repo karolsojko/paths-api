@@ -6,6 +6,8 @@ Domain\Model\Path:
             strategy: NONE
         userId:
             type: string
+        name:
+            type: string
     embedMany:
         goals:
             targetDocument: Domain\Model\Goal

@@ -8,6 +8,7 @@ class Path
 {
     private $id;
     private $userId;
+    private $name;
     private $goals;
 
     public function __construct($userId)
@@ -64,6 +65,16 @@ class Path
               return $goal;
           }
       }
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     private function getNextOrderNumber()
