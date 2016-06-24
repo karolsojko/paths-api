@@ -12,6 +12,11 @@ path_create:
     prefix:   /api/v1
     resource: AppBundle\Controller\Paths\CreateController
 
+path_update:
+    type:     rest
+    prefix:   /api/v1
+    resource: AppBundle\Controller\Paths\UpdateController
+
 path_goal_create:
     type:     rest
     prefix:   /api/v1

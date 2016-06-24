@@ -16,6 +16,9 @@ services:
     app.use_case.add_path:
         class: Domain\UseCase\AddPath
         arguments: ['@app.repository.path']
+    app.use_case.edit_path:
+        class: Domain\UseCase\EditPath
+        arguments: ['@app.repository.path']
     app.use_case.add_path_goal:
         class: Domain\UseCase\AddGoal
         arguments: ['@app.repository.path']
