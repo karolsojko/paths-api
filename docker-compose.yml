@@ -33,4 +33,4 @@ services:
         ports:
             - "27017:27017"
         volumes:
-            - /mnt/sda1/var/lib/paths-api:/data/db
+            - ./data/db:/data/db

@@ -16,6 +16,7 @@ class Command
     public $unread;
     public $lastNotificationSent;
     public $unsetDueDate = false;
+    public $newPathId;
 
     public function __construct($id, $goalId)
     {
