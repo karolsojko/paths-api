@@ -60,6 +60,19 @@ class EditGoal
             $goal->setLastNotificationSent($command->lastNotificationSent);
         }
 
+        if (!empty($command->newPathId)) {
+            $newPath = $this->pathsRepository->find($command->newPathId);
+            if (empty($newPath)) {
+                $responder->pathNotFound($command->newPathId);
+                return;
+            }
+
+            $newPath->addGoal($goal);
+            $path->removeGoal($goal->getId());
+
+            $this->pathsRepository->add($newPath);
+        }
+
         $this->pathsRepository->add($path);
 
         $responder->goalSuccesfullyEdited($path);
