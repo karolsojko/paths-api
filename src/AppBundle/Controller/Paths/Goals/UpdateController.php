@@ -21,6 +21,7 @@ class UpdateController extends FOSRestController implements Responder
      *   parameters={
      *     {"name"="id", "dataType"="string", "required"=true, "description"="path id"},
      *     {"name"="goalId", "dataType"="string", "required"=true, "description"="goal id"},
+     *     {"name"="pathId", "dataType"="string", "required"=false, "description"="change to path id"},
      *     {"name"="name", "dataType"="string", "required"=false, "description"="goal name"},
      *     {"name"="description", "dataType"="string", "required"=false, "description"="goal description"},
      *     {"name"="icon", "dataType"="string", "required"=false, "description"="goal icon url"},
@@ -49,6 +50,7 @@ class UpdateController extends FOSRestController implements Responder
             $command->unsetDueDate = true;
         }
         $command->unread = $request->get('unread');
+        $command->newPathId = $request->get('pathId');
         $command->lastNotificationSent = $request->get('lastNotificationSent');
         if ($request->request->has('achieved')) {
             $command->achieved = $request->get('achieved') == 'true';
