@@ -61,9 +61,11 @@ class UpdateController extends FOSRestController implements Responder
         return $this->handleView($this->view);
     }
 
-    public function goalSuccesfullyEdited(Path $path)
+    public function goalSuccesfullyEdited($paths)
     {
-        $this->view = $this->view($path);
+        $this->view = $this->view($paths);
+
+        $path = current($paths);
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager

@@ -25,14 +25,16 @@ class EditGoalSpec extends ObjectBehavior
     ) {
         $pathsRepository->find($userId = 1)->willReturn($path);
 
+        $path->getUserId()->willReturn($userId);
         $path->getGoal($goalId = 2)->willReturn($goal);
 
         $goal->setOrder(5)->shouldBeCalled();
         $goal->setAchieved(true)->shouldBeCalled();
 
         $pathsRepository->add($path)->shouldBeCalled();
+        $pathsRepository->findByUserId($userId = 1)->willReturn($paths = [$path]);
 
-        $responder->goalSuccesfullyEdited($path)->shouldBeCalled();
+        $responder->goalSuccesfullyEdited($paths)->shouldBeCalled();
 
         $command = new Command($userId, $goalId);
         $command->order = 5;
