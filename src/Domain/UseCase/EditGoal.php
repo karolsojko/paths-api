@@ -75,6 +75,8 @@ class EditGoal
 
         $this->pathsRepository->add($path);
 
-        $responder->goalSuccesfullyEdited($path);
+        $paths = $this->pathsRepository->findByUserId($path->getUserId());
+
+        $responder->goalSuccesfullyEdited($paths);
     }
 }

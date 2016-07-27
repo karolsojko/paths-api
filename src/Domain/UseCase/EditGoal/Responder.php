@@ -8,7 +8,7 @@ interface Responder
 {
     public function pathNotFound($id);
 
-    public function goalSuccesfullyEdited(Path $path);
+    public function goalSuccesfullyEdited($paths);
 
     public function goalNotFound($goalId);
 }
