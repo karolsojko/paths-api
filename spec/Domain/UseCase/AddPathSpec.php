@@ -24,7 +24,7 @@ class AddPathSpec extends ObjectBehavior
 
         $pathsRepository->findByUserId($userId = 1)->willReturn($paths = []);
 
-        $responder->pathSuccessfullyCreated($paths)->shouldBeCalled();
+        $responder->pathSuccessfullyCreated(Argument::cetera())->shouldBeCalled();
 
         $this->execute(new Command($userId), $responder);
     }

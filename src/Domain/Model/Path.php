@@ -6,17 +6,21 @@ use Ramsey\Uuid\Uuid;
 
 class Path
 {
+    const TYPE_USER_PATH = 'user';
+    const TYPE_CURATED_PATH = 'curated';
+
     private $id;
     private $userId;
+    private $type;
     private $name;
     private $goals;
 
-    public function __construct($userId)
+    public function __construct()
     {
         $uuid = Uuid::uuid4();
         $this->id = $uuid->toString();
-        $this->userId = $userId;
         $this->goals = [];
+        $this->type = self::TYPE_USER_PATH;
     }
 
     public function getId()
@@ -27,6 +31,21 @@ class Path
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     public function getGoals()

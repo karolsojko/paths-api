@@ -27,7 +27,8 @@ class LoadPathData implements FixtureInterface, ContainerAwareInterface
         $pathsData = $this->getPathsData();
 
         foreach ($pathsData as $userId => $pathData) {
-            $path = new Path($userId);
+            $path = new Path();
+            $path->setUserId($userId);
 
             if (!empty($pathData->cards)) {
                 foreach ($pathData->cards as $card) {
