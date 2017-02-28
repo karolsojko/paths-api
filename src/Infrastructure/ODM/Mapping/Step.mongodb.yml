@@ -1,0 +1,22 @@
+Domain\Model\Step:
+    type: embeddedDocument
+    fields:
+        id:
+            type: string
+            id: true
+            strategy: NONE
+        name:
+            type: string
+        description:
+            type: string
+        achieved:
+            type: boolean
+        icon:
+            type: string
+        level:
+            type: int
+        order:
+            type: int
+        dueDate:
+            type: date
+            serialized_name: dueDate
