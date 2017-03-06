@@ -28,3 +28,6 @@ Domain\Model\Goal:
         comments:
             targetDocument: Domain\Model\Comment
             strategy: setArray
+        steps:
+            targetDocument: Domain\Model\Step
+            strategy: setArray

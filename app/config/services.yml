@@ -31,3 +31,6 @@ services:
     app.use_case.add_path_goal_comment:
         class: Domain\UseCase\AddComment
         arguments: ['@app.repository.path']
+    app.use_case.add_path_goal_step:
+        class: Domain\UseCase\AddStep
+        arguments: ['@app.repository.path']
