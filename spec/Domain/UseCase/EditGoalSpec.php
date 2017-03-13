@@ -30,6 +30,7 @@ class EditGoalSpec extends ObjectBehavior
 
         $goal->setOrder(5)->shouldBeCalled();
         $goal->setAchieved(true)->shouldBeCalled();
+        $goal->setAchievedDate(Argument::any())->shouldBeCalled();
 
         $pathsRepository->add($path)->shouldBeCalled();
         $pathsRepository->findByUserId($userId = 1)->willReturn($paths = [$path]);
