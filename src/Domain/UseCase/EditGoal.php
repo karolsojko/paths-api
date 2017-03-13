@@ -52,6 +52,11 @@ class EditGoal
         }
         if (isset($command->achieved)) {
             $goal->setAchieved($command->achieved);
+            $achievedDateTime = new \DateTime();
+            $achievedDate = ($command->achieved) ?
+                $achievedDateTime->format(\DateTime::ATOM) :
+                null;
+            $goal->setAchievedDate($achievedDate);
         }
         if (isset($command->unread)) {
             $goal->setUnread($command->unread);

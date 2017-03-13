@@ -20,6 +20,9 @@ Domain\Model\Goal:
         dueDate:
             type: date
             serialized_name: dueDate
+        achievedDate:
+            type: date
+            serialized_name: achievedDate
         achieved:
             type: boolean
         lastNotificationSent:

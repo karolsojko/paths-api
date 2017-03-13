@@ -20,3 +20,6 @@ Domain\Model\Step:
         dueDate:
             type: date
             serialized_name: dueDate
+        achievedDate:
+            type: date
+            serialized_name: achievedDate

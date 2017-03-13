@@ -7,14 +7,15 @@ use Ramsey\Uuid\Uuid;
 abstract class Achievement
 {
 
-	protected $id;
-	protected $name;
-	protected $description;
-	protected $achieved;
-	protected $level;
-	protected $order;
-	protected $dueDate;
-	protected $icon;
+    protected $id;
+    protected $name;
+    protected $description;
+    protected $achieved;
+    protected $level;
+    protected $order;
+    protected $dueDate;
+    protected $achievedDate;
+    protected $icon;
 
     /**
      * @param string $name
@@ -64,7 +65,7 @@ abstract class Achievement
         $this->achieved = $achieved;
     }
 
-	public function setLevel($level)
+    public function setLevel($level)
     {
         $this->level = $level;
     }
@@ -97,6 +98,21 @@ abstract class Achievement
     public function unsetDueDate()
     {
         $this->dueDate = null;
+    }
+
+    public function getAchievedDate()
+    {
+        return $this->achievedDate;
+    }
+
+    public function setAchievedDate($achievedDate)
+    {
+        $this->achievedDate = $achievedDate;
+    }
+
+    public function unsetAchievedDate()
+    {
+        $this->achievedDate = null;
     }
 
     public function setIcon($icon)
